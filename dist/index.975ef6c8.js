@@ -503,6 +503,61 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"8lqZg":[function(require,module,exports) {
+var _stylesCss = require("./css/styles.css");
+var _fetchCountries = require("./js/fetchCountries");
+// import { fetchCountries } from './js/fetchCountries.js';
+// import debounce from 'lodash.debounce';
+// import Notiflix from 'notiflix';
+const input = document.querySelector("#search-box");
+const list = document.querySelector(".country-list");
+const info = document.querySelector(".country-info");
+const DEBOUNCE_DELAY = 300;
+
+},{"./css/styles.css":"1CY4s","./js/fetchCountries":"dKuy9"}],"1CY4s":[function() {},{}],"dKuy9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "fetchCountries", ()=>fetchCountries);
+const fetchCountries = (name)=>{
+    return fetch("https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags.svg,languages").then((response)=>{
+        if (!response.ok) {
+            if (response.status === 404) return [];
+            throw new Error(response.status);
+        }
+        return response.json();
+    }).catch((error)=>{
+        console.error(error);
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["1RB6v","8lqZg"], "8lqZg", "parcelRequired7c6")
 
